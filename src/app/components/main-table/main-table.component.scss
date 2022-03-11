@@ -1,4 +1,12 @@
-table {
+.table-container {
+  margin: 10vh auto;
+  width: 80%;
+  table {
+    margin: auto;
+    width: 80%;
+  }
+  .paginator {
     width: 80%;
     margin: auto;
+  }
 }
