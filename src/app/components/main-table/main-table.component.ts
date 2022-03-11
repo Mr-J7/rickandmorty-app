@@ -17,8 +17,13 @@ export interface PeriodicElement {
   styleUrls: ['./main-table.component.scss'],
 })
 export class MainTableComponent implements OnInit, OnDestroy {
+  searchName!: string;
+  searchGender!: string;
+  searchers!: string
+  name!:string
   displayedColumns: string[] = ['id', 'name', 'gender'];
   dataSource = new MatTableDataSource<any>();
+  totalItem!: number;
   private _subscription$: Subscription = new Subscription();
 
   constructor(private _apiService: ApiService) {}
@@ -41,14 +46,26 @@ export class MainTableComponent implements OnInit, OnDestroy {
       },
       eventPaginate
     );
+    let searchers = this.name
     this._subscription$ = this._apiService
-      .getCharacters(paginate.pageIndex + 1)
-      .subscribe((resp: Response ) => {
-        let list = [];
-        this.dataSource = new MatTableDataSource();
-        list.push(...resp.results);
-        this.dataSource.data = list;
-        this.dataSource = new MatTableDataSource(list);
+    .getCharacters(paginate.pageIndex + 1, searchers)
+    .subscribe((resp: Response) => {
+      let list = [];
+      this.dataSource = new MatTableDataSource();
+      list.push(...resp.results);
+      this.dataSource.data = list;
+      this.dataSource = new MatTableDataSource(list);
+      this.totalItem = resp.info.count;
       });
+  }
+
+  searchNameEvent(){
+    if(this.searchName){
+      this.name = `&name=${this.searchName}`
+      this.getListCharacters()
+    } else {
+      this.name = ''
+    }
+    this.getListCharacters()
   }
 }

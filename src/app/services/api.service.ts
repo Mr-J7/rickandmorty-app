@@ -10,7 +10,7 @@ import { Response } from '../models/response.models';
 export class ApiService {
   constructor(private _http: HttpClient) {}
 
-  getCharacters(page: number): Observable<any> {
-    return this._http.get(`${environment.apiUrl}character?page=${page}`);
+  getCharacters(page: number, searchers: string = ''): Observable<any> {
+    return this._http.get(`${environment.apiUrl}character?page=${page}${searchers}`);
   }
 }
