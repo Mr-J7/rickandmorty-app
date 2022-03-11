@@ -1,9 +1,16 @@
-
 <div class="table-container">
-    <mat-form-field appearance="outline">
-      <mat-label>Buscar por nombre..</mat-label>
-      <input matInput [(ngModel)]="searchName" (keyup)="searchNameEvent()" />
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar por nombre..</mat-label>
+    <input matInput [(ngModel)]="searchName" (keyup)="getListCharacters()" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar por género..</mat-label>
+    <mat-select [(ngModel)]="searchGender" (selectionChange)="getListCharacters()">
+      <mat-option *ngFor="let gender of genders" [value]="gender">{{
+        gender
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>id</th>

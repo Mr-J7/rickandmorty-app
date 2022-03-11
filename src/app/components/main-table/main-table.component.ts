@@ -19,8 +19,7 @@ export interface PeriodicElement {
 export class MainTableComponent implements OnInit, OnDestroy {
   searchName!: string;
   searchGender!: string;
-  searchers!: string
-  name!:string
+  genders: string[] = ['female', 'male', 'genderless', 'unknown'];
   displayedColumns: string[] = ['id', 'name', 'gender'];
   dataSource = new MatTableDataSource<any>();
   totalItem!: number;
@@ -46,26 +45,34 @@ export class MainTableComponent implements OnInit, OnDestroy {
       },
       eventPaginate
     );
-    let searchers = this.name
+    let searchers = this.filtersEvent().join('');
     this._subscription$ = this._apiService
-    .getCharacters(paginate.pageIndex + 1, searchers)
-    .subscribe((resp: Response) => {
-      let list = [];
-      this.dataSource = new MatTableDataSource();
-      list.push(...resp.results);
-      this.dataSource.data = list;
-      this.dataSource = new MatTableDataSource(list);
-      this.totalItem = resp.info.count;
-      });
+      .getCharacters(paginate.pageIndex + 1, searchers)
+      .subscribe(
+        (resp: Response) => {
+          let list = [];
+          this.dataSource = new MatTableDataSource();
+          list.push(...resp.results);
+          this.dataSource.data = list;
+          this.dataSource = new MatTableDataSource(list);
+          this.totalItem = resp.info.count;
+        },
+        () => {
+          console.log('no hay nada');
+        }
+      );
   }
 
-  searchNameEvent(){
-    if(this.searchName){
-      this.name = `&name=${this.searchName}`
-      this.getListCharacters()
-    } else {
-      this.name = ''
+  filtersEvent(): string[] {
+    let filtersArray = []
+    if (this.searchName) {
+      filtersArray.push(`&name=${this.searchName}`);
     }
-    this.getListCharacters()
+    if (this.searchGender) {
+      filtersArray.push(`&gender=${this.searchGender}`);
+    }
+    return filtersArray
   }
+
+
 }
