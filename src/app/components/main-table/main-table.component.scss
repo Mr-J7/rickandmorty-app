@@ -1,13 +1,17 @@
 .table-container {
   margin: 10vh auto;
   width: 80%;
-  .filter-container{
-      margin: auto;
-      width: 80%;
+  .filter-container {
+    margin: auto;
+    width: 80%;
   }
   table {
     margin: auto;
     width: 80%;
+  }
+  .no-data {
+    width: 80%;
+    margin: auto;
   }
   .paginator {
     width: 80%;

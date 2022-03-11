@@ -20,8 +20,11 @@ export interface PeriodicElement {
 export class MainTableComponent implements OnInit, OnDestroy {
   searchName!: string;
   searchGender!: string;
+  searchStatus!: string;
+  noData: boolean = false;
   genders: string[] = ['female', 'male', 'genderless', 'unknown'];
-  displayedColumns: string[] = ['id', 'name', 'gender'];
+  status: string[] = ['alive', 'dead', 'unknown'];
+  displayedColumns: string[] = ['id', 'name', 'gender', 'status'];
   dataSource = new MatTableDataSource<any>();
   totalItem!: number;
   private _subscription$: Subscription = new Subscription();
@@ -59,9 +62,12 @@ export class MainTableComponent implements OnInit, OnDestroy {
           this.dataSource = new MatTableDataSource(list);
           this.dataSource.sort = this.sort;
           this.totalItem = resp.info.count;
+          this.noData = false
         },
         () => {
-          console.log('no hay nada');
+          this.noData = true
+          this.dataSource.data = [];
+          this.dataSource = new MatTableDataSource();
         }
       );
   }
@@ -73,6 +79,9 @@ export class MainTableComponent implements OnInit, OnDestroy {
     }
     if (this.searchGender) {
       filtersArray.push(`&gender=${this.searchGender}`);
+    }
+    if (this.searchStatus) {
+      filtersArray.push(`&status=${this.searchStatus}`);
     }
     return filtersArray;
   }
