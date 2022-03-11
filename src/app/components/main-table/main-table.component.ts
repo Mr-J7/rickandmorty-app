@@ -62,10 +62,10 @@ export class MainTableComponent implements OnInit, OnDestroy {
           this.dataSource = new MatTableDataSource(list);
           this.dataSource.sort = this.sort;
           this.totalItem = resp.info.count;
-          this.noData = false
+          this.noData = false;
         },
         () => {
-          this.noData = true
+          this.noData = true;
           this.dataSource.data = [];
           this.dataSource = new MatTableDataSource();
         }
@@ -86,10 +86,10 @@ export class MainTableComponent implements OnInit, OnDestroy {
     return filtersArray;
   }
 
-  cleanFilters(){
-    this.searchName = ''
-    this.searchGender = ''
-    this.searchStatus = ''
-    this.getListCharacters()
+  cleanFilters() {
+    this.searchName = '';
+    this.searchGender = '';
+    this.searchStatus = '';
+    this.getListCharacters();
   }
 }
