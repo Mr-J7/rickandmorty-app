@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Paginate } from 'src/app/models/paginate.interface';
-import { Response } from 'src/app/models/response.models';
+import { Response, Results } from 'src/app/models/response.models';
 import { ApiService } from '../../services/api.service';
 
 export interface PeriodicElement {
@@ -30,7 +31,7 @@ export class MainTableComponent implements OnInit, OnDestroy {
   private _subscription$: Subscription = new Subscription();
   @ViewChild('tableSort', { static: true }) sort!: MatSort;
 
-  constructor(private _apiService: ApiService) {}
+  constructor(private _apiService: ApiService, private _route: Router) {}
 
   ngOnInit(): void {
     this.getListCharacters();
@@ -91,5 +92,9 @@ export class MainTableComponent implements OnInit, OnDestroy {
     this.searchGender = '';
     this.searchStatus = '';
     this.getListCharacters();
+  }
+
+  redirectDetailsView(row: Results) {
+    this._route.navigate(['/details-character/', row.id]);
   }
 }

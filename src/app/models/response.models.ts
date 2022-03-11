@@ -10,7 +10,7 @@ interface Info {
   prev: string | null;
 }
 
-interface Results {
+export interface Results {
   created: string;
   episode: string[];
   gender: string;

@@ -1,1 +1,56 @@
-<p>list-detail works!</p>
+<mat-card *ngIf="character" class="detail-container">
+  <mat-card-title>{{ character?.name }}</mat-card-title>
+  <mat-card-subtitle>{{ character?.species }}</mat-card-subtitle>
+  <div class="row">
+    <div class="col-5">
+      <img [src]="character?.image" alt="" />
+    </div>
+    <div class="col-7 d-flex flex-column">
+      <div class="d-flex flex-row">
+        <strong>Creado: </strong>
+        <p>{{ character?.created }}</p>
+      </div>
+      <div class="d-flex flex-row">
+        <strong>Genero: </strong>
+        <p>{{ character?.gender }}</p>
+      </div>
+      <div class="d-flex flex-row">
+        <strong>Ubicacion: </strong>
+        <p>{{ character?.location?.name }}</p>
+      </div>
+      <div class="d-flex flex-row">
+        <strong>Origen: </strong>
+        <p>{{ character?.origin?.name }}</p>
+      </div>
+      <div class="d-flex flex-row">
+        <strong>Estatus: </strong>
+        <p>{{ character?.status }}</p>
+      </div>
+      <div *ngIf="character?.type" class="d-flex flex-row">
+        <strong>Tipo: </strong>
+        <p>{{ character?.type }}</p>
+      </div>
+      <div class="d-flex flex-row">
+        <strong>Cantidad de Episodios: </strong>
+        <p>{{ character?.episode?.length }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="character?.episode?.length" class="mt-4">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Lista de Episodios </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="text-center" *ngFor="let item of character.episode">
+          <a target="_blank" class="w-100" mat-stroked-button [href]="item">{{
+            item
+          }}</a>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <mat-card-actions align="end">
+    <button color="primary" [routerLink]="['']" mat-button>Volver</button>
+  </mat-card-actions>
+</mat-card>

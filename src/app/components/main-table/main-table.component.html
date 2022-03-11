@@ -58,7 +58,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-row (click)="redirectDetailsView(row)" class="row-hover" *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <div class="text-center no-data mat-elevation-z8" *ngIf="noData">
     <h3 class="mb-0">No hay registros</h3>

@@ -1,15 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { ApiService } from 'src/app/services/api.service';
+import { Results } from '../../models/response.models';
 
 @Component({
   selector: 'app-list-detail',
   templateUrl: './list-detail.component.html',
-  styleUrls: ['./list-detail.component.scss']
+  styleUrls: ['./list-detail.component.scss'],
 })
-export class ListDetailComponent implements OnInit {
+export class ListDetailComponent implements OnInit, OnDestroy {
+  character!: Partial<Results>;
+  id!: string;
+  private _subscription$: Subscription = new Subscription();
 
-  constructor() { }
+  constructor(
+    private _apiService: ApiService,
+    private _activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.id = this._activatedRoute.snapshot.paramMap.get('id') || '';
+    if (this.id) {
+      this.getCharacter();
+    }
   }
 
+  ngOnDestroy(): void {
+    this._subscription$.unsubscribe();
+  }
+
+  getCharacter() {
+    this._subscription$ = this._apiService
+      .getSingleCharacter(this.id)
+      .subscribe((character: Partial<Results>) => {
+        this.character = character;
+      });
+  }
 }
