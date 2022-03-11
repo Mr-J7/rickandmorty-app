@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Paginate } from 'src/app/models/paginate.interface';
@@ -24,6 +25,7 @@ export class MainTableComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<any>();
   totalItem!: number;
   private _subscription$: Subscription = new Subscription();
+  @ViewChild('tableSort', { static: true }) sort!: MatSort;
 
   constructor(private _apiService: ApiService) {}
 
@@ -55,6 +57,7 @@ export class MainTableComponent implements OnInit, OnDestroy {
           list.push(...resp.results);
           this.dataSource.data = list;
           this.dataSource = new MatTableDataSource(list);
+          this.dataSource.sort = this.sort;
           this.totalItem = resp.info.count;
         },
         () => {
@@ -64,15 +67,13 @@ export class MainTableComponent implements OnInit, OnDestroy {
   }
 
   filtersEvent(): string[] {
-    let filtersArray = []
+    let filtersArray = [];
     if (this.searchName) {
       filtersArray.push(`&name=${this.searchName}`);
     }
     if (this.searchGender) {
       filtersArray.push(`&gender=${this.searchGender}`);
     }
-    return filtersArray
+    return filtersArray;
   }
-
-
 }
