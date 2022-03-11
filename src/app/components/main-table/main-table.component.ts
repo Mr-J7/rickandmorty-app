@@ -85,4 +85,11 @@ export class MainTableComponent implements OnInit, OnDestroy {
     }
     return filtersArray;
   }
+
+  cleanFilters(){
+    this.searchName = ''
+    this.searchGender = ''
+    this.searchStatus = ''
+    this.getListCharacters()
+  }
 }

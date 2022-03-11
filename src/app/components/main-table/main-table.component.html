@@ -24,6 +24,11 @@
         <mat-option *ngFor="let s of status" [value]="s">{{ s }}</mat-option>
       </mat-select>
     </mat-form-field>
+    <div *ngIf="filtersEvent().length" class="col" style="margin-top: 11px">
+      <a (click)="cleanFilters()" class="m-auto" mat-stroked-button
+        >Limpiar Filtros</a
+      >
+    </div>
   </div>
   <table
     matSort
@@ -56,7 +61,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <div class="text-center no-data mat-elevation-z8" *ngIf="noData">
-      <h3 class="mb-0">No hay registros</h3>
+    <h3 class="mb-0">No hay registros</h3>
   </div>
   <mat-paginator
     class="paginator mat-elevation-z8"
