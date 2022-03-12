@@ -8,31 +8,31 @@
     <div class="col-7 d-flex flex-column">
       <div class="d-flex flex-row">
         <strong>Creado: </strong>
-        <p>{{ character?.created }}</p>
+        <p style="margin-left: 7px;">{{ character?.created | date:'medium' }}</p>
       </div>
       <div class="d-flex flex-row">
-        <strong>Genero: </strong>
-        <p>{{ character?.gender }}</p>
+        <strong>Género: </strong>
+        <p style="margin-left: 7px;">{{ character?.gender }}</p>
       </div>
       <div class="d-flex flex-row">
-        <strong>Ubicacion: </strong>
-        <p>{{ character?.location?.name }}</p>
+        <strong>Ubicación: </strong>
+        <p style="margin-left: 7px;">{{ character?.location?.name }}</p>
       </div>
       <div class="d-flex flex-row">
         <strong>Origen: </strong>
-        <p>{{ character?.origin?.name }}</p>
+        <p style="margin-left: 7px;">{{ character?.origin?.name }}</p>
       </div>
       <div class="d-flex flex-row">
         <strong>Estatus: </strong>
-        <p>{{ character?.status }}</p>
+        <p style="margin-left: 7px;">{{ character?.status }}</p>
       </div>
       <div *ngIf="character?.type" class="d-flex flex-row">
         <strong>Tipo: </strong>
-        <p>{{ character?.type }}</p>
+        <p style="margin-left: 7px;">{{ character?.type }}</p>
       </div>
       <div class="d-flex flex-row">
         <strong>Cantidad de Episodios: </strong>
-        <p>{{ character?.episode?.length }}</p>
+        <p style="margin-left: 7px;">{{ character?.episode?.length }}</p>
       </div>
     </div>
   </div>
