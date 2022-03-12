@@ -16,10 +16,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ListDetailComponent } from './components/list-detail/list-detail.component';
+import { ListDetailComponent } from './pages/list-detail/list-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { MainTableComponent } from './components/main-table/main-table.component';
+import { MainTableComponent } from './pages/main-table/main-table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
