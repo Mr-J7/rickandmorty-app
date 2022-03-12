@@ -1,6 +1,15 @@
 <mat-card *ngIf="character" class="detail-container">
-  <mat-card-title>{{ character?.name }}</mat-card-title>
-  <mat-card-subtitle>{{ character?.species }}</mat-card-subtitle>
+  <mat-card-title class="d-flex justify-content-between align-items-center">
+    <div>
+      {{ character?.name }}
+    </div>
+    <mat-card-actions align="end">
+      <button color="primary" [routerLink]="['']" mat-button>Volver</button>
+    </mat-card-actions>
+  </mat-card-title>
+  <mat-card-subtitle style="margin-top: -30px">{{
+    character?.species
+  }}</mat-card-subtitle>
   <div class="row">
     <div class="col-5">
       <img [src]="character?.image" alt="" />
@@ -8,52 +17,52 @@
     <div class="col-7 d-flex flex-column">
       <div class="d-flex flex-row">
         <strong>Creado: </strong>
-        <p style="margin-left: 7px;">{{ character?.created | date:'medium' }}</p>
+        <p style="margin-left: 7px">
+          {{ character?.created | date: "medium" }}
+        </p>
       </div>
       <div class="d-flex flex-row">
         <strong>Género: </strong>
-        <p style="margin-left: 7px;">{{ character?.gender }}</p>
+        <p style="margin-left: 7px">{{ character?.gender }}</p>
       </div>
       <div class="d-flex flex-row">
         <strong>Ubicación: </strong>
-        <p style="margin-left: 7px;">{{ character?.location?.name }}</p>
+        <p style="margin-left: 7px">{{ character?.location?.name }}</p>
       </div>
       <div class="d-flex flex-row">
         <strong>Origen: </strong>
-        <p style="margin-left: 7px;">{{ character?.origin?.name }}</p>
+        <p style="margin-left: 7px">{{ character?.origin?.name }}</p>
       </div>
       <div class="d-flex flex-row">
         <strong>Estatus: </strong>
-        <p style="margin-left: 7px;">{{ character?.status }}</p>
+        <p style="margin-left: 7px">{{ character?.status }}</p>
       </div>
       <div *ngIf="character?.type" class="d-flex flex-row">
         <strong>Tipo: </strong>
-        <p style="margin-left: 7px;">{{ character?.type }}</p>
+        <p style="margin-left: 7px">{{ character?.type }}</p>
       </div>
       <div class="d-flex flex-row">
         <strong>Cantidad de Episodios: </strong>
-        <p style="margin-left: 7px;">{{ character?.episode?.length }}</p>
+        <p style="margin-left: 7px">{{ character?.episode?.length }}</p>
       </div>
     </div>
   </div>
-  <div *ngIf="character?.episode?.length" class="mt-4">
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title> Lista de Episodios </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="text-center" *ngFor="let item of character.episode">
-          <a target="_blank" class="w-100" mat-stroked-button [href]="item">{{
-            item
-          }}</a>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-  <mat-card-actions align="end">
-    <button color="primary" [routerLink]="['']" mat-button>Volver</button>
-  </mat-card-actions>
 </mat-card>
-<mat-card *ngIf="!character" class="d-flex justify-content-center detail-container" >
-    <mat-spinner></mat-spinner>
+<div *ngIf="character?.episode?.length" class="list-episodes">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Lista de Episodios </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="text-center" *ngFor="let item of character.episode">
+        <a class="w-100" mat-stroked-button>{{ item }}</a>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<mat-card
+  *ngIf="!character"
+  class="d-flex justify-content-center detail-container"
+>
+  <mat-spinner></mat-spinner>
 </mat-card>

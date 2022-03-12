@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { Paginate } from 'src/app/models/paginate.interface';
 import { Response, Results } from 'src/app/models/response.models';
 import { ApiService } from '../../services/api.service';
@@ -55,6 +56,7 @@ export class MainTableComponent implements OnInit, OnDestroy {
     let searchers = this.filtersEvent().join('');
     this._subscription$ = this._apiService
       .getCharacters(paginate.pageIndex + 1, searchers)
+      .pipe(debounceTime(3000))
       .subscribe(
         (resp: Response) => {
           this.showSpinner = true;
@@ -102,3 +104,5 @@ export class MainTableComponent implements OnInit, OnDestroy {
     this._route.navigate(['/details-character/', row.id]);
   }
 }
+
+
