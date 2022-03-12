@@ -1,5 +1,8 @@
 <div class="table-container">
-  <div class="filter-container row">
+  <div class="text-center">
+    <h1>Listado de Personajes</h1>
+  </div>
+  <div class="container-div row">
     <mat-form-field class="col" appearance="outline">
       <mat-label>Buscar por nombre..</mat-label>
       <input matInput [(ngModel)]="searchName" (keyup)="getListCharacters()" />
@@ -35,7 +38,7 @@
     #tableSort="matSort"
     mat-table
     [dataSource]="dataSource"
-    class="mat-elevation-z8"
+    class="mat-elevation-z8 container-div"
   >
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -60,11 +63,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row (click)="redirectDetailsView(row)" class="row-hover" *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <div class="text-center no-data mat-elevation-z8" *ngIf="noData">
+  <div class="text-center container-div mat-elevation-z8" *ngIf="noData">
     <h3 class="mb-0">No hay registros</h3>
   </div>
+  <mat-card *ngIf="showSpinner" class="d-flex justify-content-center container-div" >
+    <mat-spinner></mat-spinner>
+</mat-card>
   <mat-paginator
-    class="paginator mat-elevation-z8"
+    class="container-div mat-elevation-z8"
     [length]="totalItem"
     (page)="getListCharacters($event)"
     pageSize="20"

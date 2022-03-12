@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { Results } from '../../models/response.models';
 
@@ -16,7 +16,8 @@ export class ListDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private _apiService: ApiService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _route: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +36,8 @@ export class ListDetailComponent implements OnInit, OnDestroy {
       .getSingleCharacter(this.id)
       .subscribe((character: Partial<Results>) => {
         this.character = character;
+      }, ()=>{
+          this._route.navigate([''])
       });
   }
 }

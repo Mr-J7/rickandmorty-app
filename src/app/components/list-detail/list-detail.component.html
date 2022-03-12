@@ -54,3 +54,6 @@
     <button color="primary" [routerLink]="['']" mat-button>Volver</button>
   </mat-card-actions>
 </mat-card>
+<mat-card *ngIf="!character" class="d-flex justify-content-center detail-container" >
+    <mat-spinner></mat-spinner>
+</mat-card>

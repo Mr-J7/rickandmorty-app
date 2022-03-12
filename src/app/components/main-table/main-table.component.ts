@@ -23,6 +23,7 @@ export class MainTableComponent implements OnInit, OnDestroy {
   searchGender!: string;
   searchStatus!: string;
   noData: boolean = false;
+  showSpinner: boolean = false;
   genders: string[] = ['female', 'male', 'genderless', 'unknown'];
   status: string[] = ['alive', 'dead', 'unknown'];
   displayedColumns: string[] = ['id', 'name', 'gender', 'status'];
@@ -56,6 +57,7 @@ export class MainTableComponent implements OnInit, OnDestroy {
       .getCharacters(paginate.pageIndex + 1, searchers)
       .subscribe(
         (resp: Response) => {
+          this.showSpinner = true;
           let list = [];
           this.dataSource = new MatTableDataSource();
           list.push(...resp.results);
@@ -64,9 +66,11 @@ export class MainTableComponent implements OnInit, OnDestroy {
           this.dataSource.sort = this.sort;
           this.totalItem = resp.info.count;
           this.noData = false;
+          this.showSpinner = false;
         },
         () => {
           this.noData = true;
+          this.showSpinner = false;
           this.dataSource.data = [];
           this.dataSource = new MatTableDataSource();
         }

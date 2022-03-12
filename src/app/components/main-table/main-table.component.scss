@@ -1,23 +1,10 @@
 .table-container {
   margin: 10vh auto;
   width: 80%;
-  .filter-container {
-    margin: auto;
-    width: 80%;
-  }
-  table {
-    margin: auto;
-    width: 80%;
-  }
-  .no-data {
+  .container-div {
     width: 80%;
     margin: auto;
   }
-  .paginator {
-    width: 80%;
-    margin: auto;
-  }
-  
 }
 
 .row-hover:hover {
@@ -26,4 +13,4 @@
   font-weight: 800;
   border-top: 1.2px solid black;
   border-bottom: 1.2px solid black;
-} 
+}

@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -45,6 +46,7 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatTableModule,
     MatSortModule,
+    MatProgressSpinnerModule,
     MatPaginatorModule,
     HttpClientModule,
   ],
